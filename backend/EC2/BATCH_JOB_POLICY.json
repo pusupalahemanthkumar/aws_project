@@ -1,0 +1,37 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:TerminateInstances",
+                "ec2:DescribeInstances",
+                "ec2:StopInstances"
+            ],
+            "Resource": "arn:aws:ec2:us-east-2:975050064616:instance/*",
+            "Condition": {
+                "StringEquals": {
+                    "ec2:ResourceTag/Name": "BATCH_JOB_VM"
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::reactappstorage",
+                "arn:aws:s3:::reactappstorage/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject"
+            ],
+            "Resource": "arn:aws:s3:::reactappstorage/*"
+        }
+    ]
+}
